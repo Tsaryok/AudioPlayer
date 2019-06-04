@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>img/equalizer.png</file>
+        <file>img/mute.png</file>
+        <file>img/next.png</file>
+        <file>img/pause.png</file>
+        <file>img/play-button.png</file>
+        <file>img/previous.png</file>
+        <file>img/repeat.png</file>
+        <file>img/shuffle.png</file>
+        <file>img/stop.png</file>
+        <file>img/volume.png</file>
+    </qresource>
+</RCC>
