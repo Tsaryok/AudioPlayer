@@ -176,7 +176,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="equalizerButton">
         <property name="maximumSize">
          <size>
           <width>50</width>
@@ -197,8 +197,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>../Test3/img/equalizer.png</normaloff>../Test3/img/equalizer.png</iconset>
+         <iconset resource="resource.qrc">
+          <normaloff>:/res/img/equalizer.png</normaloff>:/res/img/equalizer.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -252,8 +252,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>../Test3/img/shuffle.png</normaloff>../Test3/img/shuffle.png</iconset>
+         <iconset resource="resource.qrc">
+          <normaloff>:/res/img/shuffle.png</normaloff>:/res/img/shuffle.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -307,8 +307,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>../Test3/img/previous.png</normaloff>../Test3/img/previous.png</iconset>
+         <iconset resource="resource.qrc">
+          <normaloff>:/res/img/previous.png</normaloff>:/res/img/previous.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -369,8 +369,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
         </property>
         <property name="icon">
          <iconset>
-          <activeoff>../Test3/img/play-button.png</activeoff>
-          <activeon>../Test3/img/pause.png</activeon>
+          <activeoff>:/res/img/play-button.png</activeoff>
+          <activeon>:/res/img/pause.png</activeon>
          </iconset>
         </property>
         <property name="iconSize">
@@ -422,8 +422,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>../Test3/img/next.png</normaloff>../Test3/img/next.png</iconset>
+         <iconset resource="resource.qrc">
+          <normaloff>:/res/img/next.png</normaloff>:/res/img/next.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -474,8 +474,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
          <string/>
         </property>
         <property name="icon">
-         <iconset>
-          <normaloff>../Test3/img/repeat.png</normaloff>../Test3/img/repeat.png</iconset>
+         <iconset resource="resource.qrc">
+          <normaloff>:/res/img/repeat.png</normaloff>:/res/img/repeat.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -536,8 +536,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
         </property>
         <property name="icon">
          <iconset>
-          <activeoff>../Test3/img/mute.png</activeoff>
-          <activeon>../Test3/img/volume.png</activeon>
+          <activeoff>:/res/img/mute.png</activeoff>
+          <activeon>:/res/img/volume.png</activeon>
          </iconset>
         </property>
         <property name="iconSize">
@@ -630,8 +630,8 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
     <property name="title">
      <string>Файл</string>
     </property>
-    <addaction name="action"/>
     <addaction name="add_action"/>
+    <addaction name="remove_action"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -640,8 +640,10 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="add_action"/>
+   <addaction name="remove_action"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action">
@@ -654,8 +656,15 @@ background-color: qlineargradient(spread:repeat, x1:0.502, y1:0, x2:0.502, y2:1,
     <string>Добавить в плейлист</string>
    </property>
   </action>
+  <action name="remove_action">
+   <property name="text">
+    <string>Удалить аудиотрек</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QDir>
 #include <QFileDialog>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -45,8 +46,11 @@ MainWindow::MainWindow(QWidget *parent) :
         player->setMuted(!checked);
     });
 
-    connect(ui->shuffleButton, &QPushButton::clicked, [this](){
-        //playlist->shuffle();
+    connect(ui->shuffleButton, &QPushButton::toggled, [this](bool checked){
+        if(checked)
+            playlist->setPlaybackMode(QMediaPlaylist::Random);
+        else
+            playlist->setPlaybackMode(QMediaPlaylist::Loop);
     });
 
     connect(ui->playlistView, &QTableView::doubleClicked, [this](const QModelIndex &index){
@@ -54,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) :
     });
 
     connect(playlist, &QMediaPlaylist::currentIndexChanged, [this](int index){
-        ui->currentTrack->setText(playlistModel->data(playlistModel->index(index, 0)).toString());
+        ui->currentTrack->setText(playlist->currentMedia().canonicalUrl().fileName());
 
     });
 
@@ -79,6 +83,23 @@ MainWindow::MainWindow(QWidget *parent) :
         player->setPosition(ui->trackTimeSlider->value()*1000);
     });
 
+    connect(ui->remove_action, &QAction::triggered, [this](){
+        playlist->removeMedia(ui->playlistView->currentIndex().row());
+        playlistModel->removeRow(ui->playlistView->currentIndex().row());
+    });
+
+    connect(ui->repeatButton, &QPushButton::toggled, [this](bool checked){
+        if(checked)
+            playlist->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+        else
+            playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    });
+
+    connect(ui->equalizerButton, &QPushButton::clicked, [this](){
+        QMessageBox::warning(this, "PlayMusic Pro", "Paid service!\nBuy $1.99", QMessageBox::Yes);
+    });
+
 }
 
 MainWindow::~MainWindow()
@@ -91,7 +112,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_add_action_triggered()
 {
-    QStringList files = QFileDialog::getOpenFileNames(this, tr("Open files"), QString(), tr("Audio Files (*.mp3)"));
+    QStringList files = QFileDialog::getOpenFileNames(this, tr("Open files"), QString(), tr("Audio Files (*.mp3)"));//
     foreach (QString filePath, files){
         QList<QStandardItem *> items;
         items.append(new QStandardItem(QDir(filePath).dirName()));
@@ -99,4 +120,5 @@ void MainWindow::on_add_action_triggered()
         playlistModel->appendRow(items);
         playlist->addMedia(QUrl(filePath));
     }
+
 }

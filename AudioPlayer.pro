@@ -31,6 +31,7 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
+        bass/include/bass.h \
         equalizer.h \
         mainwindow.h
 
@@ -45,3 +46,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resource.qrc
+
+#LIBS += -L"bass/lib/" -lbass
+#INCLUDEPATH += bass/include
+
+win32: LIBS += -L$$PWD/bass/lib/ -lbass
+
+INCLUDEPATH += $$PWD/bass/include
+DEPENDPATH += $$PWD/bass/include
